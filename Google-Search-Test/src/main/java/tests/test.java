@@ -9,14 +9,22 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.googlePage;
+import pages.searchResultPage;
 
 public class test {
 
 	private WebDriver driver;
+	googlePage objGoogle;
+
+	searchResultPage objSearchResult;
 
 	// Preconditions:
 	@BeforeTest
 	public void setUp() {
+
+		driver = new ChromeDriver(); // Open Chrome
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
 	public static void main(String[] args) {
@@ -30,20 +38,13 @@ public class test {
 	@Test
 	public void searchTest() {
 		// TODO Auto-generated method stub
+		driver.get("http://google.com");
+		objGoogle = new googlePage(driver);
 
-		driver.get("https://www.google.com/"); // Navigate to Google
+		objGoogle.searchOperation("Selenium Tutorials");
+		objSearchResult = new searchResultPage(driver);
 
-		WebElement element = driver.findElement(By.name("q")); // find searchbox element
-		element.sendKeys("Selenium Tutorials"); // Type the following word “Selenium Tutorials”
-
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		WebElement element2 = driver.findElement(By.name("btnK"));
-		element2.click(); // click on Google search button
-
-		// Validate the title of the search results page.
-		String title = driver.getTitle();
-		Assert.assertTrue(title.contains("Selenium Tutorials"), "Failed testing");
+		Assert.assertTrue(objSearchResult.getSearchResultTiltle().contains("Selenium Tutorials"), "Failed testing");
 
 	}
 
