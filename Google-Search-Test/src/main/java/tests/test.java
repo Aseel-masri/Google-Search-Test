@@ -13,6 +13,7 @@ import pages.googlePage;
 import pages.searchResultPage;
 
 public class test {
+
 	private WebDriver driver;
 	googlePage objGoogle;
 
@@ -24,6 +25,13 @@ public class test {
 
 		driver = new ChromeDriver(); // Open Chrome
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
+	public static void main(String[] args) {
+		WebDriver driver;
+		
+
+		driver = new ChromeDriver(); // Open Chrome Browser
 	}
 
 	// Test
